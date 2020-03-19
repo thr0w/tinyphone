@@ -99,7 +99,7 @@ namespace tp {
 		}
 		delete (acc);
 		accounts.erase(acc->Name());
-		SaveAccounts();
+		// SaveAccounts();
 	}
 
 	int TinyPhone::Logout() throw(pj::Error) {
@@ -123,7 +123,7 @@ namespace tp {
 			loggedOutAccounts++;
 			it = accounts.erase(it);
 		} 
-		SaveAccounts();
+		// SaveAccounts();
 		return loggedOutAccounts;
 	}
 
@@ -314,7 +314,7 @@ namespace tp {
 
 				accounts.insert(std::pair<string, SIPAccount*>(account_name, acc));
 
-				SaveAccounts();
+				//SaveAccounts();
 				return res;
 			}
 		}
