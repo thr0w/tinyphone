@@ -91,16 +91,16 @@ namespace tp {
 		SIPCall *call = new SIPCall(*this, iprm.callId);
 		CallInfo ci = call->getInfo();
 		try {
-			CallOpParam prm;
+			//CallOpParam prm;
 
 			PJ_LOG(3, (__FILENAME__, "Incoming Call: [%s] [%s]", ci.remoteUri.c_str(), ci.stateText.c_str()));
 
 			eventStream->publishEvent(ci, iprm);
 
 			calls.push_back(call);
-			prm.statusCode = pjsip_status_code::PJSIP_SC_OK;
-			call->answer(prm);
-			onCallEstablished(call);
+			//prm.statusCode = pjsip_status_code::PJSIP_SC_OK;
+			//call->answer(prm);
+			//onCallEstablished(call);
 		}
 		catch (...) {
 			PJ_LOG(3, (__FILENAME__, "ERROR Answering IncomingCall [%s]", ci.remoteUri.c_str()));

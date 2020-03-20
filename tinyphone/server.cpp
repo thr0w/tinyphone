@@ -2,6 +2,7 @@
 
 #include "server.h"
 #include "utils.h"
+#include "account.h"
 #include "phone.h"
 #include "net.h"
 #include <unordered_set>
@@ -484,6 +485,30 @@ void TinyPhoneHttpServer::Start() {
 		}
 		catch (...) {
 			return tp::response(500, DEFAULT_HTTP_SERVER_ERROR_REPONSE);
+		}
+	});
+
+	CROW_ROUTE(app, "/calls/<int>/answer")
+		.methods("POST"_method)
+		([&phone](int call_id) {
+		pj_thread_auto_register();
+
+		SIPCall* call = phone.CallById(call_id);
+		if (call == nullptr) {
+			return tp::response(400, {
+				{ "message", "Call Not Found" },
+				{"call_id" , call_id}
+				});
+		}
+		else {
+			CallOpParam prm;
+			prm.statusCode = pjsip_status_code::PJSIP_SC_OK;
+			call->answer(prm);
+			json response = {
+				{ "message",  "Answer Triggered" },
+				{ "call_id" , call_id }
+			};
+			return tp::response(202, response);
 		}
 	});
 
