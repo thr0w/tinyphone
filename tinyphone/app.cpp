@@ -37,11 +37,11 @@ using namespace tp;
 UINT WM_TASKBAR = 0;
 HWND Hwnd;
 HMENU Hmenu;
-NOTIFYICONDATA notifyIconData;
+// NOTIFYICONDATA notifyIconData;
 TCHAR szTIP[MAX_TOOLTIP_LENGTH] = TEXT("Strowger TinyPhone");
 char szClassName[] = "TinyPhone";
 Endpoint ep;
-SPLASH splashScreen;
+// SPLASH splashScreen;
 
 
 namespace tp {
@@ -53,7 +53,7 @@ namespace tp {
 
 /*procedures  */
 LRESULT CALLBACK WindowProcedure(HWND, UINT, WPARAM, LPARAM);
-void InitNotifyIconData();
+// void InitNotifyIconData();
 void InitPJSUAEndpoint(std::string logfile);
 void ExitApplication();
 
@@ -84,10 +84,10 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
 #endif
 
 	/*Initialize the NOTIFYICONDATA structure only once*/
-	InitNotifyIconData();
+	// InitNotifyIconData();
 
-	splashScreen.Init(Hwnd, hThisInstance, IDB_SPLASH);
-	splashScreen.Show();
+	// splashScreen.Init(Hwnd, hThisInstance, IDB_SPLASH);
+	// splashScreen.Show();
 
 	InitConfig();
 
@@ -110,7 +110,7 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
 		exit(0);
 	});
 
-	splashScreen.Hide();
+	// splashScreen.Hide();
 
 	/* Run the message loop. It will run until GetMessage() returns 0 */
 	while (GetMessage(&messages, NULL, 0, 0))
@@ -141,8 +141,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_CREATE:
 		break;
 	case WM_CLOSE:
-		notifyIconData.uFlags = 0;
-		Shell_NotifyIcon(NIM_DELETE, &notifyIconData);
+		// notifyIconData.uFlags = 0;
+		// Shell_NotifyIcon(NIM_DELETE, &notifyIconData);
 		return 0;
 		break;
 	case WM_DESTROY:
@@ -229,7 +229,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 	return DefWindowProc(hwnd, message, wParam, lParam);
 }
 
-
+/*
 void InitNotifyIconData()
 {
 	memset(&notifyIconData, 0, sizeof(NOTIFYICONDATA));
@@ -254,6 +254,7 @@ void InitNotifyIconData()
 
 	Shell_NotifyIcon(NIM_ADD, &notifyIconData);
 }
+*/
 
 std::vector<std::string> GetLocalDNSServers() {
 	FIXED_INFO *pFixedInfo;
@@ -410,8 +411,8 @@ void ExitApplication() {
 #ifdef _DEBUG
 	CloseConsole();
 #endif
-	notifyIconData.uFlags = 0;
-	Shell_NotifyIcon(NIM_DELETE, &notifyIconData);
+	//notifyIconData.uFlags = 0;
+	//Shell_NotifyIcon(NIM_DELETE, &notifyIconData);
 	if(tp::tpHttpServer != nullptr)
 		tp::tpHttpServer->Stop();
 }
