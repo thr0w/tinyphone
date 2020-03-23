@@ -268,7 +268,7 @@ namespace tp {
 
 	boost::filesystem::path GetLogDir() {
 		auto tmp_dir = boost::filesystem::temp_directory_path();
-		auto tiny_dir = tmp_dir.append("tinyphone");
+		auto tiny_dir = tmp_dir.append("SoftphoneCVV");
 		if (!boost::filesystem::exists(tiny_dir))
 			boost::filesystem::create_directory(tiny_dir);
 		return tiny_dir;
