@@ -168,7 +168,7 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 			AppendMenu(Hmenu, MF_SEPARATOR, 0, TEXT(""));
 			AppendMenu(Hmenu, MF_STRING, ID_TRAY_LOGDIR, TEXT("View Logs"));
 			AppendMenu(Hmenu, MF_STRING, ID_TRAY_EXIT, TEXT("Exit"));
-			DestroyMenu(hMenu);
+			//DestroyMenu(hMenu);
 
 			// Get current mouse position.
 			POINT curPoint;
