@@ -21,8 +21,8 @@
 
 #define SECURITY_SALT "St$%C1aNrV$D"
 
-#define SIP_LOG_FILE "tinyphone"
-#define HTTP_LOG_FILE "tinyphone-http"
+#define SIP_LOG_FILE "sip"
+#define HTTP_LOG_FILE "http"
 
 #define MSG_CONTACT_IT_SUPPORT "ERROR Connecting Audio Device, Please Contact Floor IT Support"
 #define MSG_DEVICE_ERROR "Audio Device Test Failed, Please Contact Floor IT Support"
