@@ -38,7 +38,7 @@ UINT WM_TASKBAR = 0;
 HWND Hwnd;
 HMENU Hmenu;
 // NOTIFYICONDATA notifyIconData;
-TCHAR szTIP[MAX_TOOLTIP_LENGTH] = TEXT("Strowger TinyPhone");
+TCHAR szTIP[MAX_TOOLTIP_LENGTH] = TEXT("CVV 188 TinyPhone");
 char szClassName[] = "TinyPhone";
 Endpoint ep;
 // SPLASH splashScreen;
