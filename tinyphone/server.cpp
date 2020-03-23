@@ -659,24 +659,7 @@ void TinyPhoneHttpServer::Start() {
 		return tp::response(200, response);
 	});
 
-	if (is_tcp_port_in_use(http_port)) {
-		const int result = MessageBoxW(NULL, L"Failed to Start! Tinyphone is already running.\n\nDo you want to quit the other instance ?", L"Tinyphone Error",  MB_YESNO);
-		switch (result)
-		{
-		case IDYES:
-			{
-			std::string url = "http://localhost:" + std::to_string(http_port) + std::string("/exit");
-			auto response = http_post(url, "");
-			tp::MetricsClient.increment("api.autokill");
-			CROW_LOG_INFO << "Kill Response: " << response.body;
-			std::this_thread::sleep_for(2s);
-			}
-			break;
-		case IDNO:
-			return;
-			break;
-		}
-	}
+	if (is_tcp_port_in_use(http_port)) return;
 
 	if (is_tcp_port_in_use(http_port)) {
 		tp::DisplayError("Failed to Bind Port!\n\nPlease ensure port " + std::to_string(http_port) + " is not used by any other application.", OPS::SYNC);
