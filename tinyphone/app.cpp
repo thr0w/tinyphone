@@ -332,7 +332,7 @@ void InitPJSUAEndpoint(std::string logfile) {
 		ep_cfg.logConfig.decor |= PJ_LOG_HAS_CR | PJ_LOG_HAS_DAY_OF_MON |  PJ_LOG_HAS_MONTH |  PJ_LOG_HAS_YEAR ;
 		ep_cfg.uaConfig.userAgent = ApplicationConfig.ua();
 
-		if (ep_cfg.uaConfig.useStunServer) {
+		if (ApplicationConfig.useStunServer) {
 			ep_cfg.uaConfig.stunServer = ApplicationConfig.stunServer;
 		}
 
