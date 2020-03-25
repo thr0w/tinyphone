@@ -31,6 +31,8 @@ namespace tp {
 		bool dropCallsOnFail;
 
 		std::string uaPrefix;
+		std::string stunServer;
+
 		size_t maxCalls;
 		size_t maxAccounts;
 		size_t pjThreadCount;
@@ -81,6 +83,7 @@ namespace tp {
 			{"firstRetryIntervalSec", p.firstRetryIntervalSec },
 			{"dropCallsOnFail", p.dropCallsOnFail },
 			{"uaPrefix", p.uaPrefix },
+			{"stunServer", p.stunServer },
 			{"maxCalls", p.maxCalls },
 			{"maxAccounts", p.maxAccounts },
 			{"audioCodecs", p.audioCodecs },
@@ -115,6 +118,7 @@ namespace tp {
 		j.at("firstRetryIntervalSec").get_to(p.firstRetryIntervalSec);
 		j.at("dropCallsOnFail").get_to(p.dropCallsOnFail);
 		j.at("uaPrefix").get_to(p.uaPrefix);
+		j.at("stunServer").get_to(p.stunServer);
 		j.at("maxCalls").get_to(p.maxCalls);
 		j.at("maxAccounts").get_to(p.maxAccounts);
 		j.at("audioCodecs").get_to(p.audioCodecs);
