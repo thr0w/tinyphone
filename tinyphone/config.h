@@ -112,9 +112,9 @@ namespace tp {
 			{"autoDeviceRefresh", p.autoDeviceRefresh },
 			{"useStunServer", p.useStunServer },
 			{"stunServer", p.stunServer },
-			{"stunIgnoreFailure", p.stunServer },
-			{"natTypeInSdp", p.stunServer },
-			{"mwiUnsolicitedEnabled", p.stunServer },
+			{"stunIgnoreFailure", p.stunIgnoreFailure },
+			{"natTypeInSdp", p.natTypeInSdp },
+			{"mwiUnsolicitedEnabled", p.mwiUnsolicitedEnabled },
 		};
     }
 
@@ -149,14 +149,13 @@ namespace tp {
 		j.at("metricsProto").get_to(p.metricsProto);
 		j.at("metricsServerPort").get_to(p.metricsServerPort);
 		j.at("autoDeviceRefresh").get_to(p.autoDeviceRefresh);
-		j.at("userStunServer").get_to(p.autoUnHold);
+		j.at("useStunServer").get_to(p.useStunServer);
 		if (j.find("stunServer") != j.end()) {
 			j.at("stunServer").get_to(p.stunServer);
 		}
 		j.at("stunIgnoreFailure").get_to(p.stunIgnoreFailure);
 		j.at("natTypeInSdp").get_to(p.natTypeInSdp);
 		j.at("mwiUnsolicitedEnabled").get_to(p.mwiUnsolicitedEnabled);
-
     }
    
     extern appConfig ApplicationConfig;
