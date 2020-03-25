@@ -110,7 +110,7 @@ namespace tp {
 			{"metricsServerHosts", p.metricsServerHosts },
 			{"metricsServerPort", p.metricsServerPort },
 			{"autoDeviceRefresh", p.autoDeviceRefresh },
-			{"useStunServer", p.useStunServer }
+			{"useStunServer", p.useStunServer },
 			{"stunServer", p.stunServer },
 			{"stunIgnoreFailure", p.stunServer },
 			{"natTypeInSdp", p.stunServer },
