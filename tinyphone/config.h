@@ -110,8 +110,11 @@ namespace tp {
 			{"metricsServerHosts", p.metricsServerHosts },
 			{"metricsServerPort", p.metricsServerPort },
 			{"autoDeviceRefresh", p.autoDeviceRefresh },
-			{"stunServer", p.useStunServer }
+			{"useStunServer", p.useStunServer }
 			{"stunServer", p.stunServer },
+			{"stunIgnoreFailure", p.stunServer },
+			{"natTypeInSdp", p.stunServer },
+			{"mwiUnsolicitedEnabled", p.stunServer },
 		};
     }
 
@@ -150,6 +153,10 @@ namespace tp {
 		if (j.find("stunServer") != j.end()) {
 			j.at("stunServer").get_to(p.stunServer);
 		}
+		j.at("stunIgnoreFailure").get_to(p.stunIgnoreFailure);
+		j.at("natTypeInSdp").get_to(p.natTypeInSdp);
+		j.at("mwiUnsolicitedEnabled").get_to(p.mwiUnsolicitedEnabled);
+
     }
    
     extern appConfig ApplicationConfig;
