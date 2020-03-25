@@ -14,6 +14,15 @@
 #include <iphlpapi.h>
 #include <algorithm> 
 
+
+#include "phone.h"
+
+#include "utils.h"
+#include "json.h"
+#include "config.h"
+#include <iomanip>
+
+
 #ifdef _DEBUG
 #pragma comment(lib, "libpjproject-i386-Win32-vc14-Debug-Static.lib")
 #else
@@ -323,8 +332,9 @@ void InitPJSUAEndpoint(std::string logfile) {
 		ep_cfg.logConfig.decor |= PJ_LOG_HAS_CR | PJ_LOG_HAS_DAY_OF_MON |  PJ_LOG_HAS_MONTH |  PJ_LOG_HAS_YEAR ;
 		ep_cfg.uaConfig.userAgent = ApplicationConfig.ua();
 		ep_cfg.uaConfig.threadCnt = ApplicationConfig.pjThreadCount;
+		ep_cfg.uaConfig.stun_host = pj_str("stun.l.google.com:19302");
+		ep_cfg.uaConfig.stun_srv_cnt = 0;
 		ep_cfg.medConfig.threadCnt = ApplicationConfig.pjMediaThreadCount;
-		ep_cfg.medConfig.turn_server = pj_str("stun.l.google.com:19302");
 		ep_cfg.medConfig.noVad = ApplicationConfig.disableVAD;
 		ep_cfg.medConfig.clockRate = ApplicationConfig.clockRate;
 

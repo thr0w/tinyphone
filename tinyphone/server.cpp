@@ -66,7 +66,7 @@ void TinyPhoneHttpServer::Start() {
 	crow::logger::setHandler(new TinyPhoneHTTPLogHandler(logfile));
 	int http_port = 6060;
 
-	CROW_LOG_INFO << "Starting the TinyPhone HTTP API";
+	CROW_LOG_INFO << "Starting the SoftPhoneCVV/TinyPhone HTTP API";
 
 	/* Define HTTP Endpoints */
 	CROW_ROUTE(app, "/")([]() {
