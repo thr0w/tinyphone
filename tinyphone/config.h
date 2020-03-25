@@ -31,7 +31,6 @@ namespace tp {
 		bool dropCallsOnFail;
 
 		std::string uaPrefix;
-		std::string stunServer;
 
 		size_t maxCalls;
 		size_t maxAccounts;
@@ -66,6 +65,11 @@ namespace tp {
 
 		bool autoDeviceRefresh;
 
+		bool useStunServer;
+		std::vector<std::string> stunServer;
+		bool stunIgnoreFailure;
+		int natTypeInSdp;
+		bool mwiUnsolicitedEnabled;
 
 		std::string ua(){
 			std::string productVersion;
@@ -83,7 +87,6 @@ namespace tp {
 			{"firstRetryIntervalSec", p.firstRetryIntervalSec },
 			{"dropCallsOnFail", p.dropCallsOnFail },
 			{"uaPrefix", p.uaPrefix },
-			{"stunServer", p.stunServer },
 			{"maxCalls", p.maxCalls },
 			{"maxAccounts", p.maxAccounts },
 			{"audioCodecs", p.audioCodecs },
@@ -107,6 +110,8 @@ namespace tp {
 			{"metricsServerHosts", p.metricsServerHosts },
 			{"metricsServerPort", p.metricsServerPort },
 			{"autoDeviceRefresh", p.autoDeviceRefresh },
+			{"stunServer", p.useStunServer }
+			{"stunServer", p.stunServer },
 		};
     }
 
@@ -118,7 +123,6 @@ namespace tp {
 		j.at("firstRetryIntervalSec").get_to(p.firstRetryIntervalSec);
 		j.at("dropCallsOnFail").get_to(p.dropCallsOnFail);
 		j.at("uaPrefix").get_to(p.uaPrefix);
-		j.at("stunServer").get_to(p.stunServer);
 		j.at("maxCalls").get_to(p.maxCalls);
 		j.at("maxAccounts").get_to(p.maxAccounts);
 		j.at("audioCodecs").get_to(p.audioCodecs);
@@ -142,6 +146,10 @@ namespace tp {
 		j.at("metricsProto").get_to(p.metricsProto);
 		j.at("metricsServerPort").get_to(p.metricsServerPort);
 		j.at("autoDeviceRefresh").get_to(p.autoDeviceRefresh);
+		j.at("userStunServer").get_to(p.autoUnHold);
+		if (j.find("stunServer") != j.end()) {
+			j.at("stunServer").get_to(p.stunServer);
+		}
     }
    
     extern appConfig ApplicationConfig;

@@ -331,7 +331,15 @@ void InitPJSUAEndpoint(std::string logfile) {
 		ep_cfg.logConfig.level = ApplicationConfig.pjLogLevel;
 		ep_cfg.logConfig.decor |= PJ_LOG_HAS_CR | PJ_LOG_HAS_DAY_OF_MON |  PJ_LOG_HAS_MONTH |  PJ_LOG_HAS_YEAR ;
 		ep_cfg.uaConfig.userAgent = ApplicationConfig.ua();
-		ep_cfg.uaConfig.stunServer = pj_str(ApplicationConfig.stunServer);
+
+		if (ep_cfg.uaConfig.useStunServer) {
+			ep_cfg.uaConfig.stunServer = ApplicationConfig.stunServer;
+		}
+
+		ep_cfg.uaConfig.stunIgnoreFailure = ApplicationConfig.stunIgnoreFailure;
+		ep_cfg.uaConfig.natTypeInSdp = ApplicationConfig.natTypeInSdp;
+		ep_cfg.uaConfig.mwiUnsolicitedEnabled = ApplicationConfig.mwiUnsolicitedEnabled;
+
 		ep_cfg.medConfig.threadCnt = ApplicationConfig.pjMediaThreadCount;
 		ep_cfg.medConfig.noVad = ApplicationConfig.disableVAD;
 		ep_cfg.medConfig.clockRate = ApplicationConfig.clockRate;
