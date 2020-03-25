@@ -85,7 +85,10 @@ namespace tp {
 			SetConsoleTextAttribute(hConsole, FOREGROUND_YELLOW);
 			std::cout << "======= Application Config ======" << std::endl << k.dump(4) << std::endl;
 		}
-		catch (...) {
+		catch (const std::exception& exc) {
+
+			std::cerr << exc.what();
+
 			SetConsoleTextAttribute(hConsole, FOREGROUND_YELLOW);
 			std::cout << "======= Remote Config ======" << std::endl << jsonConfig << std::endl;
 
