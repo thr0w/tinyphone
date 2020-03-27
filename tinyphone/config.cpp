@@ -87,7 +87,7 @@ namespace tp {
 		}
 		catch (const std::exception& exc) {
 
-			std::cerr << exc.what();
+			std::cout << exc.what();
 
 			SetConsoleTextAttribute(hConsole, FOREGROUND_YELLOW);
 			std::cout << "======= Remote Config ======" << std::endl << jsonConfig << std::endl;
