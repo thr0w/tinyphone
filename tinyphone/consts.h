@@ -24,7 +24,7 @@
 #define SIP_LOG_FILE "sip"
 #define HTTP_LOG_FILE "http"
 
-#define MSG_CONTACT_IT_SUPPORT "ERROR Connecting Audio Device, Please Contact Floor IT Support"
-#define MSG_DEVICE_ERROR "Audio Device Test Failed, Please Contact Floor IT Support"
+#define MSG_CONTACT_IT_SUPPORT "ERRO: Sem permissão para usar o audio do computador"
+#define MSG_DEVICE_ERROR "ERRO: Falha ao acessar o audo do compuador"
 
 #endif
