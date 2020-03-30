@@ -112,6 +112,25 @@ namespace tp {
 				PJ_LOG(1, (__FILENAME__, "Skipping UnRegister for %s as calls active %d", acc->Name().c_str(), callCount));
 				it++;
 				continue;
+		synchronized(add_acc_mutex) {
+			auto it = accounts.begin();
+			while (it != accounts.end()) {
+				SIPAccount* acc = it->second;
+				auto callCount = acc->calls.size();
+				if (callCount > 0) {
+					PJ_LOG(1, (__FILENAME__, "Skipping UnRegister for %s as calls active %d", acc->Name().c_str(), callCount));
+					it++;
+					continue;
+				}
+				try {
+					acc->UnRegister();
+				}
+				catch (Error& err) {
+					PJ_LOG(1, (__FILENAME__, "Logout UnRegister Error %s", err.reason.c_str()));
+				}
+				delete (acc);
+				loggedOutAccounts++;
+				it = accounts.erase(it);
 			}
 			try {
 				acc->UnRegister();
@@ -123,7 +142,18 @@ namespace tp {
 			loggedOutAccounts++;
 			it = accounts.erase(it);
 		} 
-		// SaveAccounts();
+		SaveAccounts();
+			// SaveAccounts();
+		}
+
+
+
+
+
+
+
+
+
 		return loggedOutAccounts;
 	}
 
@@ -273,6 +303,17 @@ namespace tp {
 		o << std::setw(4) << j << std::endl;
 		o.close();
 		return true;
+		try
+		{
+			json j = uc;
+			std::ofstream o(userConfigFile);
+			o << std::setw(4) << j << std::endl;
+			o.close();
+			return true;
+		} catch(const std::exception& e) {
+			PJ_LOG(1, (__FILENAME__, "SaveAccounts:: Error %s", e.what()));
+			return false;
+		}
 	}
 
 	std::future<int> TinyPhone::AddAccount(AccountConfig& config) throw (std::exception) {
@@ -314,7 +355,7 @@ namespace tp {
 
 				accounts.insert(std::pair<string, SIPAccount*>(account_name, acc));
 
-				//SaveAccounts();
+				// SaveAccounts();
 				return res;
 			}
 		}
