@@ -29,11 +29,11 @@ namespace tp {
 
 		if (remoteConfig.code / 100 != 2 || contentType != "application/json" ) {
 			//Try Secondary Location
-			message = "ERROR: Failed to fetch Remote Config from Primary!";
+			message = "O aplicativo Softphone CVV precisa estar sendo executado!";
 			if (remoteConfig.error != "")
 				message += "\nERROR:" + remoteConfig.error;
 				
-			std::cout << "Config Load From Primary Failed :  Response Code " << remoteConfig.code << ", Content-Type: " <<  contentType << std::endl;
+			std::cout << "O aplicativo Softphone CVV precisa respondeu errado:  Response Code " << remoteConfig.code << ", Content-Type: " <<  contentType << std::endl;
 			std::string productVersion;
 			#ifdef _DEBUG
 			productVersion = "HEAD";
@@ -42,9 +42,9 @@ namespace tp {
 			productVersion = "v" + productVersion;
 			#endif
 
-			std::string url = str(boost::format(REMOTE_CONFIG_URL_SECONDARY) % (productVersion));
-			std::cout << "Config Load From Secondary : " << url << std::endl;
-			remoteConfig = http_get(url);
+			// std::string url = str(boost::format(REMOTE_CONFIG_URL_SECONDARY) % (productVersion));
+			// std::cout << "Config Load From Secondary : " << url << std::endl;
+			// remoteConfig = http_get(url);
 		}
 
 		if (remoteConfig.code / 100 != 2) {

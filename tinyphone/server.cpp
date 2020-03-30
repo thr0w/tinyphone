@@ -1,4 +1,4 @@
-#include "stdafx.h"
+http_port#include "stdafx.h"
 
 #include "server.h"
 #include "utils.h"
@@ -666,7 +666,7 @@ void TinyPhoneHttpServer::Start() {
 	}
 	else {
 		running = true;
-		app.bindaddr("0.0.0.0")
+		app.bindaddr("127.0.0.1")
 			.port(http_port)
 			.multithreaded()
 			.run();
