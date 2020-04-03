@@ -7,24 +7,12 @@
 [submodule "lib/opus"]
 	path = lib/opus
 	url = https://github.com/xiph/opus.git
-[submodule "lib/crow"]
-	path = lib/crow
-	url = git@github.com:kingster/crow.git
 [submodule "lib/boost"]
 	path = lib/boost
 	url = https://github.com/boostorg/boost.git
-[submodule "lib/json"]
-	path = lib/json
-	url = https://github.com/nlohmann/json.git
-[submodule "lib/curl"]
-	path = lib/curl
-	url = https://github.com/curl/curl.git
 [submodule "lib/bcg729"]
 	path = lib/bcg729
 	url = git@github.com:BelledonneCommunications/bcg729.git
-[submodule "lib/cryptopp"]
-	path = lib/cryptopp
-	url = git@github.com:weidai11/cryptopp.git
 [submodule "lib/portaudio"]
 	path = lib/portaudio
 	url = git@github.com:voiceip/portaudio.git
