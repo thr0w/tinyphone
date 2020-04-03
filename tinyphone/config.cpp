@@ -71,7 +71,7 @@ namespace tp {
 			if (remoteConfig.error != "")
 				message += "\nERROR:" + remoteConfig.error;
 				
-			std::cout << "O aplicativo Softphone CVV precisa respondeu errado:  Response Code " << remoteConfig.code << ", Content-Type: " <<  contentType << std::endl;
+			std::cout << "O aplicativo Softphone CVV respondeu errado:  Response Code " << remoteConfig.code << ", Content-Type: " <<  contentType << std::endl;
 			std::string productVersion;
 			#ifdef _DEBUG
 			productVersion = "HEAD";
