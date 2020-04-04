@@ -355,7 +355,7 @@ void InitPJSUAEndpoint(std::string logfile) {
 
 		// Transport Setup
 		TransportConfig tcfg;
-		int port = 5060;
+		int port = 15061;
 
 		switch (ApplicationConfig.transport)
 		{
