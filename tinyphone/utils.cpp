@@ -1,7 +1,5 @@
-#include "stdafx.h"
 #include "utils.h"
 #include <thread>
-#include <boost/algorithm/string.hpp>
 #include <windows.h>
 #include <winver.h>
 #include <cryptopp/sha3.h>

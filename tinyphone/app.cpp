@@ -1,16 +1,10 @@
-#include "stdafx.h"
 #include <windows.h>
 #include <shellapi.h>
 #include <ctime>
-#include "resource.h"
-#include "guicon.h"
 #include "server.h"
 #include "utils.h"
-#include "net.h"
 #include "consts.h"
 #include "config.h"
-#include "log.h"
-#include "splash.h"
 #include <iphlpapi.h>
 #include <algorithm> 
 
@@ -18,7 +12,6 @@
 #include "phone.h"
 
 #include "utils.h"
-#include "json.h"
 #include "config.h"
 #include <iomanip>
 

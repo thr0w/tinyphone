@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <string>
-#include "json.h"
 #include "consts.h"
 #include "utils.h"
 #include <pjsua-lib/pjsua.h>
@@ -78,6 +77,7 @@ namespace tp {
 		};
 	};
 
+/*
 	static void to_json(nlohmann::json& j, const appConfig& p) {
 		j = nlohmann::json{
 			{"transport", p.transport },
@@ -157,36 +157,22 @@ namespace tp {
 		j.at("natTypeInSdp").get_to(p.natTypeInSdp);
 		j.at("mwiUnsolicitedEnabled").get_to(p.mwiUnsolicitedEnabled);
     }
-   
+
+*/
     extern appConfig ApplicationConfig;
 
     void InitConfig();
 
-	struct AccountConfig {
+	struct TPAccountConfig {
 		std::string username;
 		std::string domain;
 		std::string password;
 		std::string proxy;
 	};
 
-	void from_json(const nlohmann::json& j, AccountConfig& p);
-
-	void to_json(nlohmann::json& j, const AccountConfig& p);
-
 	struct tpUserConfig {
 		std::vector<AccountConfig> accounts;
-	};
-
-	static void from_json(const nlohmann::json& j, tpUserConfig& p) {
-		j.at("accounts").get_to(p.accounts);
-	}
-
-	static void to_json(nlohmann::json& j, const tpUserConfig& p) {
-		j = nlohmann::json{
-			{"accounts", p.accounts },
-		};
-	}
+	};	
 }
-
 
 #endif

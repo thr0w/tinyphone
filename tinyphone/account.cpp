@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "account.h"
 #include "phone.h"
 #include "metrics.h"

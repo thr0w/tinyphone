@@ -1,20 +1,15 @@
-#include "stdafx.h"
 
 #include "server.h"
 #include "utils.h"
 #include "account.h"
 #include "phone.h"
-#include "net.h"
 #include <unordered_set>
 #include <mutex>
 #include <future>
 #include <thread>
 #include <chrono>
 #include "channel.h"
-#include "json.h"
 #include "config.h"
-#include "microtar.h"
-#include "log.h"
 #include <stdio.h>
 #include <algorithm>
 #include "boost/date_time/posix_time/posix_time.hpp"
@@ -22,31 +17,15 @@
 
 using namespace std;
 using namespace pj;
-using json = nlohmann::json;
 using namespace boost::posix_time;
 
-#define DEFAULT_HTTP_SERVER_ERROR_REPONSE  {{ "message", "Something went Wrong :(" }}
-
-namespace tp {
-	struct response : crow::response {
-		response(int code, const nlohmann::json& _body) : crow::response{ code,  _body.dump() } {
-			add_header("Access-Control-Allow-Origin", "*");
-			add_header("Access-Control-Allow-Headers", "Content-Type");
-			add_header("Content-Type", "application/json");
-		}
-	};
-}
-
 using namespace tp;
-
 
 void TinyPhoneHttpServer::Start() {
 
 	pj_thread_auto_register();
 	channel<std::string> updates;
 	std::thread ws_publisher_thread;
-
-	std::cout << "Starting TinyPhone" << std::endl;
 
 	TinyPhone phone(endpoint);
 	tinyPhone = &phone;
@@ -59,7 +38,6 @@ void TinyPhoneHttpServer::Start() {
 	
 	phone.CreateEventStream(&updates);
 
-	crow::App<TinyPhoneMiddleware> app;
 	std::mutex mtx;;
 	app.get_middleware<TinyPhoneMiddleware>().setMessage("tinyphone");
 	app.loglevel(crow::LogLevel::Info);

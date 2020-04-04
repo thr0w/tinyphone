@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "call.h"
 #include "account.h"
 #include "utils.h"

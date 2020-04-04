@@ -11,7 +11,6 @@
 #include "events.h"
 #include "utils.h"
 #include "config.h"
-#include "json.h"
 
 #include <map> 
 #include <boost/foreach.hpp>

@@ -12,6 +12,7 @@ Write-Host "`nUpdating Submodules......"
 git submodule -q update --init
 
 cmd /c subst P: C:\projects\tinyphone
+# replace e:\lib\ P:\lib\
 
 pushd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools"
 cmd /c "VsDevCmd.bat&set" |

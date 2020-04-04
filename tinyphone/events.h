@@ -7,13 +7,11 @@
 #include "channel.h"
 #include <iostream>
 #include <pjsua2.hpp>
-#include "json.h"
 #include "utils.h"
 #include "config.h"
 
 using namespace std;
 using namespace pj;
-using json = nlohmann::json;
 
 class EventStream {
 	channel<std::string>* chan;
