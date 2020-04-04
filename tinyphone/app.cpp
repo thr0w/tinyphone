@@ -14,7 +14,6 @@
 #include <iphlpapi.h>
 #include <algorithm> 
 
-
 #include "phone.h"
 
 #include "utils.h"
@@ -355,19 +354,20 @@ void InitPJSUAEndpoint(std::string logfile) {
 
 		// Transport Setup
 		TransportConfig tcfg;
-		int port = 15061;
+
+		SIP_CLIENT_PORT = 15060;
 
 		switch (ApplicationConfig.transport)
 		{
 		case PJSIP_TRANSPORT_UDP:
-			while (is_udp_port_in_use(port)) {
-				port++;
+			while (is_udp_port_in_use(SIP_CLIENT_PORT)) {
+				SIP_CLIENT_PORT++;
 			}
 			break;
 		case PJSIP_TRANSPORT_TCP:
 		case PJSIP_TRANSPORT_TLS:
-			while (is_tcp_port_in_use(port)) {
-				port++;
+			while (is_tcp_port_in_use(SIP_CLIENT_PORT)) {
+				SIP_CLIENT_PORT++;
 			}
 			break;
 		default:
@@ -379,10 +379,10 @@ void InitPJSUAEndpoint(std::string logfile) {
 
 		CROW_LOG_INFO << "Running Product Version: " << productVersion;
 		CROW_LOG_INFO << "Using Transport Protocol: " << ApplicationConfig.transport;
-		CROW_LOG_INFO << "Using Transport Port: " << port;
+		CROW_LOG_INFO << "Using Transport Port: " << SIP_CLIENT_PORT;
 		CROW_LOG_INFO << "Using UA: " << ApplicationConfig.ua();
 		
-		tcfg.port = port;
+		tcfg.port = SIP_CLIENT_PORT;
 		auto status = ep.transportCreate((pjsip_transport_type_e)ApplicationConfig.transport, tcfg);
 		if (status != PJ_SUCCESS) {
 			CROW_LOG_INFO << "pjsua.transportCreate returned status : "  << status ;

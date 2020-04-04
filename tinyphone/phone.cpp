@@ -316,6 +316,31 @@ namespace tp {
 				acc_cfg.videoConfig.autoTransmitOutgoing = PJ_FALSE;
 				acc_cfg.videoConfig.autoShowIncoming = PJ_FALSE;
 
+				/*
+				if (accountSettings.account.disableSessionTimer) {
+					acc_cfg.use_timer = PJSUA_SIP_TIMER_INACTIVE;
+				}
+
+				if (accountSettings.account.srtp == _T("optional")) {
+					acc_cfg.use_srtp = PJMEDIA_SRTP_OPTIONAL;
+				}
+				else if (accountSettings.account.srtp == _T("mandatory")) {
+					acc_cfg.use_srtp = PJMEDIA_SRTP_MANDATORY;
+				}
+				else {
+					acc_cfg.use_srtp = PJMEDIA_SRTP_DISABLED;
+				}
+				if (!accountSettings.enableSTUN || accountSettings.stun.IsEmpty()) {
+					acc_cfg.rtp_cfg.public_addr = StrToPjStr(accountSettings.account.publicAddr);
+				}
+				acc_cfg.ice_cfg_use = PJSUA_ICE_CONFIG_USE_CUSTOM;
+				acc_cfg.ice_cfg.enable_ice = accountSettings.account.ice ? PJ_TRUE : PJ_FALSE;
+				acc_cfg.allow_via_rewrite = accountSettings.account.allowRewrite ? PJ_TRUE : PJ_FALSE;
+				acc_cfg.allow_sdp_nat_rewrite = acc_cfg.allow_via_rewrite;
+				acc_cfg.allow_contact_rewrite = acc_cfg.allow_via_rewrite ? 2 : PJ_FALSE;
+				acc_cfg.publish_enabled = accountSettings.account.publish ? PJ_TRUE : PJ_FALSE;
+				*/
+
 				SIPAccount *acc(new SIPAccount(this, account_name, eventStream, config));
 				acc->domain = config.domain;
 				auto res = acc->Create(acc_cfg);

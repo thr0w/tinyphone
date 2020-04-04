@@ -77,6 +77,8 @@ private:
 	std::atomic<bool> running;
 
 public:
+	static int SIP_CLIENT_port;
+
 	TinyPhoneHttpServer(pj::Endpoint* ep, std::string log_file) {
 		endpoint = ep;
 		logfile = log_file;

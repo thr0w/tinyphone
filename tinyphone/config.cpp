@@ -8,6 +8,11 @@
 #define ALLOW_OFFLINE_CONFIG true
 #define LOCAL_CONFIG_FILE "config.json"
 
+int SIP_CLIENT_PORT = 15060;
+std::string SIP_ACCOUNT_NAME(std::string username, std::string domain) {
+	return	username + "@" + domain + ":" + std::to_string(SIP_CLIENT_PORT);
+}
+
 namespace tp {
 
 	appConfig ApplicationConfig;

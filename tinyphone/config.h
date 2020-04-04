@@ -20,6 +20,9 @@
 
 #define DEFUALT_PJ_LOG_LEVEL 3
 
+extern int SIP_CLIENT_PORT;
+extern std::string SIP_ACCOUNT_NAME(std::string username, std::string domain);
+
 namespace tp {
 
 	struct appConfig {
