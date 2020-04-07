@@ -32,8 +32,18 @@ namespace tp {
 		int retryIntervalSec;
 		int firstRetryIntervalSec;
 		bool dropCallsOnFail;
+		pjsua_sip_timer_use timerUse;
+		pjmedia_srtp_use srtpUse;
+
+		bool authInitialEmpty;
 
 		std::string uaPrefix;
+
+		std::string publicAddress;
+
+		bool iceEnabled;
+		bool allowRewrite;
+		bool publish;
 
 		size_t maxCalls;
 		size_t maxAccounts;

@@ -307,6 +307,8 @@ namespace tp {
 					acc_cfg.sipConfig.proxies = { config.proxy };
 				}
 
+				acc_cfg.sipConfig.authInitialEmpty = ApplicationConfig.authInitialEmpty;
+
 				acc_cfg.regConfig.timeoutSec = ApplicationConfig.timeoutSec;
 				acc_cfg.regConfig.delayBeforeRefreshSec = ApplicationConfig.refreshIntervalSec;
 				acc_cfg.regConfig.retryIntervalSec = ApplicationConfig.retryIntervalSec;
@@ -316,30 +318,17 @@ namespace tp {
 				acc_cfg.videoConfig.autoTransmitOutgoing = PJ_FALSE;
 				acc_cfg.videoConfig.autoShowIncoming = PJ_FALSE;
 
-				/*
-				if (accountSettings.account.disableSessionTimer) {
-					acc_cfg.use_timer = PJSUA_SIP_TIMER_INACTIVE;
-				}
+				acc_cfg.callConfig.timerUse = ApplicationConfig.timerUse; // ;
+				acc_cfg.mediaConfig.srtpUse = ApplicationConfig.srtpUse; // PJMEDIA_SRTP_OPTIONAL, PJMEDIA_SRTP_MANDATORY, PJMEDIA_SRTP_DISABLED
 
-				if (accountSettings.account.srtp == _T("optional")) {
-					acc_cfg.use_srtp = PJMEDIA_SRTP_OPTIONAL;
+				if (!ApplicationConfig.useStunServer) {
+					acc_cfg.mediaConfig.transportConfig.publicAddress = ApplicationConfig.publicAddress;
 				}
-				else if (accountSettings.account.srtp == _T("mandatory")) {
-					acc_cfg.use_srtp = PJMEDIA_SRTP_MANDATORY;
-				}
-				else {
-					acc_cfg.use_srtp = PJMEDIA_SRTP_DISABLED;
-				}
-				if (!accountSettings.enableSTUN || accountSettings.stun.IsEmpty()) {
-					acc_cfg.rtp_cfg.public_addr = StrToPjStr(accountSettings.account.publicAddr);
-				}
-				acc_cfg.ice_cfg_use = PJSUA_ICE_CONFIG_USE_CUSTOM;
-				acc_cfg.ice_cfg.enable_ice = accountSettings.account.ice ? PJ_TRUE : PJ_FALSE;
-				acc_cfg.allow_via_rewrite = accountSettings.account.allowRewrite ? PJ_TRUE : PJ_FALSE;
-				acc_cfg.allow_sdp_nat_rewrite = acc_cfg.allow_via_rewrite;
-				acc_cfg.allow_contact_rewrite = acc_cfg.allow_via_rewrite ? 2 : PJ_FALSE;
-				acc_cfg.publish_enabled = accountSettings.account.publish ? PJ_TRUE : PJ_FALSE;
-				*/
+				acc_cfg.natConfig.iceEnabled = ApplicationConfig.iceEnabled;
+				acc_cfg.natConfig.viaRewriteUse = ApplicationConfig.allowRewrite ? PJ_TRUE : PJ_FALSE;
+				acc_cfg.natConfig.sdpNatRewriteUse = ApplicationConfig.allowRewrite ? PJ_TRUE : PJ_FALSE;
+				acc_cfg.natConfig.contactRewriteUse = ApplicationConfig.allowRewrite ? 2 : PJ_FALSE;
+				acc_cfg.presConfig.publishEnabled = ApplicationConfig.publish ? PJ_TRUE : PJ_FALSE;
 
 				SIPAccount *acc(new SIPAccount(this, account_name, eventStream, config));
 				acc->domain = config.domain;
