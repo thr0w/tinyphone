@@ -299,7 +299,7 @@ namespace tp {
 				acc_cfg.regConfig.registrarUri = ("sip:" + config.domain);
 				
 				addTransportSuffix(acc_cfg.regConfig.registrarUri);
-				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", "*", config.username, 0, config.password));
+				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", "asterisk", config.username, 0, config.password));
 				
 				if (config.proxy.size() > 0) {
 					acc_cfg.sipConfig.proxies = { config.proxy };
