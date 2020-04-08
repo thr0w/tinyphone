@@ -40,7 +40,7 @@ namespace tp {
 		std::string uaPrefix;
 
 		std::string publicClientAddress;
-		std::string realm;
+		std::string realmStr;
 
 		bool iceEnabled;
 		bool allowRewrite;
