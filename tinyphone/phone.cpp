@@ -16,7 +16,7 @@ namespace tp {
 		unsigned uCount = 32;
 		if (pjsua_enum_codecs(codec, &uCount) == PJ_SUCCESS) {
 			for (unsigned i = 0; i<uCount; ++i) {
-				PJ_LOG(3, (__FILENAME__, "supported codec  %d\t%.*s\n", codec[i].priority, (int)codec[i].codec_id.slen, codec[i].codec_id.ptr));
+				PJ_LOG(3, (__FILENAME__, "supported codec  %d\t%.*s", codec[i].priority, (int)codec[i].codec_id.slen, codec[i].codec_id.ptr));
 			}
 		}
 
@@ -299,7 +299,7 @@ namespace tp {
 				acc_cfg.regConfig.registrarUri = ("sip:" + config.domain);
 				
 				addTransportSuffix(acc_cfg.regConfig.registrarUri);
-				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", ApplicationConfig.realmStr, config.username, 0, config.password));
+				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", ApplicationConfig.realmAny?"*":"asterisk", config.username, 0, config.password));
 				
 				if (config.proxy.size() > 0) {
 					acc_cfg.sipConfig.proxies = { config.proxy };

@@ -52,7 +52,7 @@ RUN mkdir C:\Code
 WORKDIR "Program Files"
 RUN rd /S /Q WindowsPowerShell\Modules\PSReadLine
 
-#subst P: C:\Code\tinyphone
+#subst E: C:\Code\tinyphone
 
 WORKDIR C:\BuildTools
 
