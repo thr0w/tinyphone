@@ -8,7 +8,6 @@
 #include <pjsua2.hpp>
 #include <iostream>
 #include "enum.h"
-#include "events.h"
 #include "utils.h"
 #include <boost/foreach.hpp>
 

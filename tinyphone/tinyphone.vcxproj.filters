@@ -39,9 +39,6 @@
     <ClInclude Include="channel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="events.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="call.h">
       <Filter>Header Files</Filter>
     </ClInclude>

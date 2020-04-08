@@ -50,7 +50,6 @@ namespace tp {
 	string sipLogFile;
 	string httpLogFile;
 	tm* launchDate;
-	TinyPhoneHttpServer* tpHttpServer;
 }
 
 /*procedures  */
@@ -62,7 +61,7 @@ void ExitApplication();
 
 void pj_logerror(pj_status_t status, char * message) {
 	if (status != PJ_SUCCESS) {
-		CROW_LOG_ERROR << "pjsua returned error : " << status;
+		// TODO CALLBACK CROW_LOG_ERROR << "pjsua returned error : " << status;
 	}
 }
 
@@ -72,12 +71,7 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
 	int nCmdShow)
 {
 	MSG messages;
-	Hwnd = CreateDialog(
-		hThisInstance,
-		MAKEINTRESOURCE(IDD_EMPTY_DIALOG),
-		NULL,
-		(DLGPROC)WindowProcedure
-	);
+
 
 	HRESULT hr = CoInitializeEx(0, COINIT_MULTITHREADED);
 

@@ -1,11 +1,8 @@
 #include "phone.h"
 #include "metrics.h"
 #include "utils.h"
-#include "json.h"
 #include "config.h"
 #include <iomanip>
-
-using json = nlohmann::json;
 
 namespace tp {
 
@@ -228,61 +225,7 @@ namespace tp {
 		ConfigureAudioDevices();
 	}
 
-	bool TinyPhone::RestoreAccounts(){
-		std::ifstream ucfg(userConfigFile);
-
-		if (!ucfg.is_open()) {
-			PJ_LOG(3, (__FILENAME__, "UserAccount ConfigFile Not Found, Nothing to Restore %s",userConfigFile.c_str()));
-			return false;
-		}
-
-		json j;
-		try{
-			ucfg >> j;
-			ucfg.close();
-			tp::tpUserConfig uc = j.get<tpUserConfig>();
-
-			PJ_LOG(3, (__FILENAME__, "Restoring User Accounts %d", uc.accounts.size()));
-			try
-			{
-				BOOST_FOREACH(AccountConfig acfg,uc.accounts) {
-					AddAccount(acfg);
-				}
-			}
-			catch(const std::domain_error e)
-			{
-				PJ_LOG(3, (__FILENAME__, "Restoring User Accounts Error %s", e.what()));
-				tp::MetricsClient.increment("api.login.error.device_error");
-				if (ApplicationConfig.deviceErrorAlert) {
-					tp::DisplayError(MSG_CONTACT_IT_SUPPORT, tp::OPS::ASYNC);
-				}
-			}
-		} catch(...) {
-			PJ_LOG(3, (__FILENAME__, "Restoring User Failed due to Error"));
-			return false;
-		}
-		return true;
-	}
-
-	bool TinyPhone::SaveAccounts(){
-		tp::tpUserConfig uc;
-		BOOST_FOREACH(SIPAccount* acc, Accounts()){
-			uc.accounts.push_back(acc->accConfig);
-		}
-		try
-		{
-			json j = uc;
-			std::ofstream o(userConfigFile);
-			o << std::setw(4) << j << std::endl;
-			o.close();
-			return true;
-		} catch(const std::exception& e) {
-			PJ_LOG(1, (__FILENAME__, "SaveAccounts:: Error %s", e.what()));
-			return false;
-		}
-	}
-
-	std::future<int> TinyPhone::AddAccount(AccountConfig& config) throw (std::exception) {
+	std::future<int> TinyPhone::AddAccount(CVVAccountConfig& config) throw (std::exception) {
 		string account_name = SIP_ACCOUNT_NAME(config.username, config.domain);
 		tp::MetricsClient.increment("login");
 		synchronized(add_acc_mutex){
@@ -315,7 +258,7 @@ namespace tp {
 				acc_cfg.videoConfig.autoTransmitOutgoing = PJ_FALSE;
 				acc_cfg.videoConfig.autoShowIncoming = PJ_FALSE;
 
-				SIPAccount *acc(new SIPAccount(this, account_name, eventStream, config));
+				SIPAccount *acc(new SIPAccount(this, account_name, config));
 				acc->domain = config.domain;
 				auto res = acc->Create(acc_cfg);
 

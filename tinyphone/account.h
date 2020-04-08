@@ -9,7 +9,6 @@
 #include <future>
 #include <chrono>
 #include "enum.h"
-#include "events.h"
 #include "call.h"
 #include "utils.h"
 #include "config.h"
@@ -33,14 +32,12 @@ namespace tp {
 	public:
 
 		AccountConfig accConfig;
-		EventStream* eventStream;
 		std::string domain;
 		std::vector<SIPCall *> calls;
 
-		SIPAccount(tp::TinyPhone* parent, std::string name, EventStream* es, AccountConfig cfg)
+		SIPAccount(tp::TinyPhone* parent, std::string name, AccountConfig cfg)
 		{
 			account_name = name;
-			eventStream = es;
 			phone = parent;
 			accConfig = cfg;
 		}
@@ -57,7 +54,6 @@ namespace tp {
 						pjsip_status_code::PJSIP_SC_OK
 					};
 					ai.regIsActive = false;
-					eventStream->publishEvent(ai, prm);
 				}
 				else {
 					std::cout << "Underlying Account Already Shutdown" << account_name << std::endl;

@@ -163,7 +163,7 @@ namespace tp {
 
     void InitConfig();
 
-	struct TPAccountConfig {
+	struct CVVAccountConfig {
 		std::string username;
 		std::string domain;
 		std::string password;
@@ -171,7 +171,7 @@ namespace tp {
 	};
 
 	struct tpUserConfig {
-		std::vector<AccountConfig> accounts;
+		std::vector<CVVAccountConfig> accounts;
 	};	
 }
 

@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <string>
 #include <stdexcept>
-#include "events.h"
 #include "utils.h"
 #include "config.h"
 
@@ -24,7 +23,6 @@ namespace tp {
 		typedef std::map<string, SIPAccount*> map_string_acc;
 		map_string_acc accounts;
 		pj::Endpoint* endpoint;
-		EventStream* eventStream;
 
 		std::string userConfigFile;
 
@@ -55,12 +53,6 @@ namespace tp {
 				HangupAllCalls();
 				Logout();
 			}
-			delete eventStream;
-			std::cout << "Shutting Down TinyPhone Complete" << std::endl;
-		}
-
-		void CreateEventStream(channel<std::string>* ch) {
-			eventStream = new EventStream(ch);
 		}
 
 		void SetCodecs();
@@ -79,10 +71,6 @@ namespace tp {
 
 		bool HasAccounts() ;
 
-		bool RestoreAccounts();
-
-		bool SaveAccounts();
-
 		SIPAccount* PrimaryAccount();
 
 		SIPAccount* AccountByName(string name) ;
@@ -93,7 +81,7 @@ namespace tp {
 
 		void EnableAccount(SIPAccount* account) throw (std::exception) ;
 
-		std::future<int> AddAccount(AccountConfig& config) throw (std::exception);
+		std::future<int> AddAccount(CVVAccountConfig& config) throw (std::exception);
 
 		SIPCall* MakeCall(string uri) throw(pj::Error) ;
 
