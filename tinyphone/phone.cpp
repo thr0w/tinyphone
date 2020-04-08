@@ -299,7 +299,7 @@ namespace tp {
 				acc_cfg.regConfig.registrarUri = ("sip:" + config.domain);
 				
 				addTransportSuffix(acc_cfg.regConfig.registrarUri);
-				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", "asterisk", config.username, 0, config.password));
+				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", ApplicationConfig.realmStr, config.username, 0, config.password));
 				
 				if (config.proxy.size() > 0) {
 					acc_cfg.sipConfig.proxies = { config.proxy };
@@ -320,7 +320,7 @@ namespace tp {
 				acc_cfg.mediaConfig.srtpUse = ApplicationConfig.srtpUse; // PJMEDIA_SRTP_OPTIONAL, PJMEDIA_SRTP_MANDATORY, PJMEDIA_SRTP_DISABLED
 
 				if (!ApplicationConfig.useStunServer) {
-					acc_cfg.mediaConfig.transportConfig.publicAddress = ApplicationConfig.publicAddress;
+					acc_cfg.mediaConfig.transportConfig.publicAddress = ApplicationConfig.publicClientAddress;
 				}
 				acc_cfg.natConfig.iceEnabled = ApplicationConfig.iceEnabled;
 				acc_cfg.natConfig.viaRewriteUse = ApplicationConfig.allowRewrite ? PJ_TRUE : PJ_FALSE;
