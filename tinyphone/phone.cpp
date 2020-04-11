@@ -299,7 +299,14 @@ namespace tp {
 				acc_cfg.regConfig.registrarUri = ("sip:" + config.domain);
 				
 				addTransportSuffix(acc_cfg.regConfig.registrarUri);
-				acc_cfg.sipConfig.authCreds.push_back(AuthCredInfo("digest", ApplicationConfig.realmAny?"*":"asterisk", config.username, 0, config.password));
+				AuthCredInfo authCred;
+				authCred.username = config.username;
+				authCred.realm = ApplicationConfig.realmAny ? "*" : "asterisk";
+				authCred.scheme = "Digest";
+				authCred.dataType = PJSIP_CRED_DATA_PLAIN_PASSWD;
+				authCred.data = config.password;
+				
+				acc_cfg.sipConfig.authCreds.push_back(authCred);
 				
 				if (config.proxy.size() > 0) {
 					acc_cfg.sipConfig.proxies = { config.proxy };
