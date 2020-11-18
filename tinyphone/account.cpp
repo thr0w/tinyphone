@@ -101,6 +101,13 @@ namespace tp {
 			//prm.statusCode = pjsip_status_code::PJSIP_SC_OK;
 			//call->answer(prm);
 			//onCallEstablished(call);
+
+			//if(ApplicationConfig.autoAnswer){
+//				CallOpParam prm;
+	//			prm.statusCode = pjsip_status_code::PJSIP_SC_OK;
+		//		call->answer(prm);
+			//	onCallEstablished(call);
+			//}
 		}
 		catch (...) {
 			PJ_LOG(3, (__FILENAME__, "ERROR Answering IncomingCall [%s]", ci.remoteUri.c_str()));

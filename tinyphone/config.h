@@ -19,6 +19,7 @@
 #endif
 
 #define DEFUALT_PJ_LOG_LEVEL 3
+#define FROM_JSON_OPTIONAL(v1) if (j.find(#v1) != j.end()) j.at(#v1).get_to(p.v1);
 
 extern int SIP_CLIENT_PORT;
 extern std::string SIP_ACCOUNT_NAME(std::string username, std::string domain);
@@ -78,6 +79,8 @@ namespace tp {
 		int metricsServerPort;
 
 		bool autoDeviceRefresh;
+		bool autoAnswer = true;
+		bool persistAccounts = true;
 
 		bool useStunServer;
 		std::vector<std::string> stunServer;
@@ -129,10 +132,12 @@ namespace tp {
 			{"stunIgnoreFailure", p.stunIgnoreFailure },
 			{"natTypeInSdp", p.natTypeInSdp },
 			{"mwiUnsolicitedEnabled", p.mwiUnsolicitedEnabled },
+			{"autoAnswer", p.autoAnswer },
+			{"persistAccounts", p.persistAccounts },
 		};
     }
 
-   static void from_json(const nlohmann::json& j, appConfig& p) {
+    static void from_json(const nlohmann::json& j, appConfig& p) {
 		j.at("transport").get_to(p.transport);
 		j.at("timeoutSec").get_to(p.timeoutSec);
 		j.at("refreshIntervalSec").get_to(p.refreshIntervalSec);
@@ -170,6 +175,8 @@ namespace tp {
 		j.at("stunIgnoreFailure").get_to(p.stunIgnoreFailure);
 		j.at("natTypeInSdp").get_to(p.natTypeInSdp);
 		j.at("mwiUnsolicitedEnabled").get_to(p.mwiUnsolicitedEnabled);
+		FROM_JSON_OPTIONAL(autoAnswer);
+		FROM_JSON_OPTIONAL(persistAccounts);
     }
    
     extern appConfig ApplicationConfig;

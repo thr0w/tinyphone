@@ -70,7 +70,7 @@ namespace tp {
 			contentType = contentTypeIt->second;
 		}
 
-		if (remoteConfig.code / 100 != 2 || contentType != "application/json" ) {
+		if (remoteConfig.code / 100 != 2 || contentType.rfind("application/json", 0) != 0 ) {
 			//Try Secondary Location
 			message = "O aplicativo Softphone CVV precisa estar sendo executado!";
 			if (remoteConfig.error != "")
